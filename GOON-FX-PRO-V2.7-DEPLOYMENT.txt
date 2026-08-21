@@ -1,0 +1,46 @@
+GOON FX PRO V2.7 — THIRD-PARTY DERIV TRADING TERMINAL
+
+FLOW
+GOON FX -> Deriv OAuth login/consent -> GOON FX secure session
+-> authenticated Deriv WebSocket -> BUY/SELL from GOON FX.
+
+The user's Deriv password is entered only on Deriv.
+The OAuth access token stays in the gateway's HttpOnly Secure cookie.
+GOON FX is the trading interface; Deriv executes and settles the trade.
+
+FILES
+- GOON-FX-PRO-V2.7-THIRD-PARTY-TRADING.html
+- goonfx-deriv-oauth-gateway.js
+- wrangler.toml
+
+DERIV OAUTH
+Register an OAuth 2.0 application.
+Exact redirect URI:
+https://goonfx.com/oauth/callback
+
+Scope:
+trade
+
+WORKER VARIABLES
+DERIV_CLIENT_ID = your Deriv OAuth client ID
+DERIV_REDIRECT_URI = https://goonfx.com/oauth/callback
+APP_ORIGIN = https://goonfx.com
+
+ROUTES TO THE WORKER
+/oauth/start
+/oauth/callback
+/api/session
+/api/otp
+/api/logout
+
+DEPLOY
+1. Host the V2.7 HTML over HTTPS.
+2. Deploy the Worker on the same goonfx.com zone.
+3. Route the listed paths to the Worker.
+4. Test Demo first.
+5. Then test Real with a small amount.
+
+SECURITY
+Do not put the Deriv OAuth client secret/access token in the HTML.
+Do not log OAuth codes, access tokens, or OTP URLs.
+The OTP WebSocket URL is short-lived and one-time.
