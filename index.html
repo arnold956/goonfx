@@ -68,8 +68,8 @@ main{min-width:0}.page{display:none}.page.active{display:block}.section-title{di
 const CONFIG={
   OAUTH_CLIENT_ID:'YOUR_DERIV_OAUTH_CLIENT_ID',
   OAUTH_GATEWAY:'https://YOUR-GOON-FX-OAUTH-WORKER.workers.dev',
-  PUBLIC_WS:'wss://api.derivws.com/trading/v1/options/ws/public',
-  API_BASE:'https://api.derivws.com'
+  PUBLIC_WS:'wss://api.deriv.com/trading/v1/options/ws/public',
+  API_BASE:'https://api.deriv.com'
 };
 let publicWS=null,tradeWS=null,chart=null,series=null,current='',timeframe=60,price=null,bars={},markets=[],lastProposal=null,reqSeq=100,reconnectTimer=null,account=null,accountType='demo',authenticated=false,watchTimer=null;
 const $=id=>document.getElementById(id); const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
