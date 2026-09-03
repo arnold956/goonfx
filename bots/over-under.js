@@ -1,0 +1,1 @@
+export default {id:'over-under',name:'Over / Under',description:'Independent digit Over/Under bot with configurable barrier.',contract:'DIGITOVER',barrier:5,choose(ctx){return ctx.hotDigit>ctx.barrier?'over':'under';}};
