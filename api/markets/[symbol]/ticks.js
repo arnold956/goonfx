@@ -1,0 +1,2 @@
+const { cors, publicWs } = require('../../../lib/deriv');
+module.exports=async(req,res)=>{cors(res);if(req.method==='OPTIONS')return res.status(204).end();const symbol=req.query.symbol;try{const d=await publicWs({ticks_history:symbol,count:Math.min(Number(req.query.count||100),500),end:'latest',style:'ticks'});const h=d.history||{};const prices=(h.prices||[]).map(Number).filter(Number.isFinite);return res.json({symbol,prices,times:h.times||[]});}catch(e){return res.status(502).json({error:e.message});}};
