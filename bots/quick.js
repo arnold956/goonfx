@@ -1,0 +1,1 @@
+export default {id:'quick',name:'Quick Bot',description:'Minimal low-latency strategy runner using the current live tick context.',contract:'CALL',choose(ctx){return ctx.last>=ctx.previous?'rise':'fall';}};
