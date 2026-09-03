@@ -1,0 +1,1 @@
+export default {id:'ai',name:'AI Bot',description:'Adaptive statistical signal bot. Signals are analytics only and are not guaranteed predictions.',contract:'DIGITOVER',barrier:5,choose(ctx){return ctx.hotDigit>ctx.barrier?'over':'under';}};
