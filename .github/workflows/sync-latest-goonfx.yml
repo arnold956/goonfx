@@ -6,7 +6,6 @@ on:
 
 permissions:
   contents: write
-  workflows: write
 
 jobs:
   sync:
@@ -21,7 +20,7 @@ jobs:
       - name: Copy latest source from goonfxg
         run: |
           git clone --depth 1 https://github.com/arnold956/goonfxg.git /tmp/goonfxg
-          rsync -a --delete --exclude='.git/' /tmp/goonfxg/ ./
+          rsync -a --delete --exclude='.git/' --exclude='.github/' /tmp/goonfxg/ ./
 
       - name: Commit synced source
         run: |
