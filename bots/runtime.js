@@ -1,6 +1,6 @@
 import {BotEngine} from './engine.js';
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const API=(window.GOONFX_CONFIG?.BACKEND_URL||location.origin).replace(/\/$/,'');
 
 function digitFromQuote(quote) {
   const s = String(quote);
@@ -10,7 +10,7 @@ function digitFromQuote(quote) {
 
 export async function startBot({bot,accountId,symbol,currency='USD',stake=1,duration=5,durationUnit='t',barrier=5,multiplier=10,maxStake=20,onEvent}) {
   if (!bot || !accountId || !symbol) throw new Error('Bot, account and market are required');
-  const engine = new BotEngine('', onEvent);
+  const engine = new BotEngine(API, onEvent);
   await engine.connect(accountId);
   engine.subscribe(symbol);
 
