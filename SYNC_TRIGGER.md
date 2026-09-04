@@ -1,1 +1,0 @@
-Trigger final synchronization of latest GoonFx source.
