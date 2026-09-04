@@ -29,4 +29,4 @@ jobs:
           git add -A
           git diff --cached --quiet && exit 0
           git commit -m 'Sync latest GoonFx code from goonfxg [sync-from-goonfxg]'
-          git push origin HEAD:main
+          git push --force origin HEAD:main
