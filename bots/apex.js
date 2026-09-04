@@ -1,1 +1,0 @@
-export default {id:'apex',name:'Apex Bot',description:'Momentum-style bot with explicit risk limits and live execution controls.',contract:'CALL',choose(ctx){return ctx.last>=ctx.previous?'rise':'fall';}};

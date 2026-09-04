@@ -1,1 +1,0 @@
-export default {id:'quick-digits',name:'Quick Digits',description:'Fast digit-contract execution using the live Deriv tick stream.',contract:'DIGITOVER',barrier:5,choose(ctx){return ctx.lastDigit>=5?'over':'under';}};

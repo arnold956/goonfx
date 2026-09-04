@@ -1,1 +1,0 @@
-export default {id:'accumulator',name:'Accumulator',description:'Independent multiplier strategy; requires a market that supports multiplier contracts.',contract:'MULTUP',multiplier:10,choose(){return 'up';}};

@@ -1,1 +1,0 @@
-export default {id:'automated',name:'Automated',description:'Generic automated strategy runner with user-selected contract type and strict session limits.',contract:'CALL',choose(ctx){return ctx.last>=ctx.previous?'rise':'fall';}};

@@ -1,1 +1,0 @@
-export default {id:'crash-boom',name:'Crash / Boom',description:'Independent synthetic-index bot. Contract availability is validated by Deriv for the selected market.',contract:'CALL',choose(ctx){return ctx.last>=ctx.previous?'rise':'fall';}};

@@ -1,1 +1,0 @@
-export default {id:'signal-ai',name:'SignalAI',description:'Live signal dashboard using digit distribution and direction checks.',contract:'DIGITEVEN',choose(ctx){return ctx.evenPct>=ctx.oddPct?'even':'odd';}};

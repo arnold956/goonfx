@@ -1,1 +1,0 @@
-export default {id:'even-odd',name:'Even / Odd',description:'Independent Even/Odd digit bot driven by live tick statistics.',contract:'DIGITEVEN',choose(ctx){return ctx.evenPct>=ctx.oddPct?'even':'odd';}};
