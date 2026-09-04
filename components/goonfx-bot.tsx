@@ -105,9 +105,14 @@ export function GoonFxBot() {
     setBuyError(null);
     setBuyResult(null);
     lastTradeRef.current = Date.now();
-    setLastAction(`Submitting live ${trading.activeSymbol?.underlying_symbol ?? 'market'} trade…`);
+    setLastAction(`Submitting live ${trading.activeSymbol?.symbol ?? 'market'} trade…`);
 
     try {
+      // Deriv supports a direct buy request with buy=1 and contract
+      // parameters. `price` is the maximum price the account authorizes for
+      // this purchase. Using the requested stake as that ceiling avoids a
+      // stale proposal-ID dependency while still letting Deriv validate the
+      // contract parameters on the authenticated account.
       const result = await ws.send<BuyResponse>({
         buy: 1,
         price: tradeParams.amount,
@@ -189,7 +194,7 @@ export function GoonFxBot() {
             <span className={`h-2.5 w-2.5 rounded-full ${isConnected ? 'bg-emerald-500' : 'bg-red-500'}`} />
             {isConnected ? 'Deriv connected' : 'Disconnected'}
             {auth.activeAccount && <span className="rounded-full border px-2 py-1">{auth.activeAccount.account_type.toUpperCase()} · {auth.activeAccount.currency}</span>}
-            <span className="rounded-full border px-2 py-1">{trading.activeSymbol?.underlying_symbol ?? '—'}</span>
+            <span className="rounded-full border px-2 py-1">{trading.activeSymbol?.symbol ?? '—'}</span>
           </div>
         </div>
 
