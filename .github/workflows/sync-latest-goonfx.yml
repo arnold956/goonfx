@@ -1,4 +1,4 @@
-name: Sync latest GoonFx code
+name: Maintain GoonFx main
 
 on:
   push:
@@ -8,25 +8,22 @@ permissions:
   contents: write
 
 jobs:
-  sync:
-    if: ${{ !contains(github.event.head_commit.message, '[sync-from-goonfxg]') }}
+  maintain:
+    if: ${{ !contains(github.event.head_commit.message, '[auto-fix]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout goonfx
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-
-      - name: Copy latest source from goonfxg
+      - name: Fix ActiveSymbol display_name references
         run: |
-          git clone --depth 1 https://github.com/arnold956/goonfxg.git /tmp/goonfxg
-          rsync -a --delete --exclude='.git/' --exclude='.github/' /tmp/goonfxg/ ./
-
-      - name: Commit synced source
+          sed -i 's/trading\.activeSymbol?\.display_name/trading.activeSymbol?.underlying_symbol/g' components/goonfx-terminal.tsx
+      - name: Commit fixes
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
+          git add components/goonfx-terminal.tsx
           git diff --cached --quiet && exit 0
-          git commit -m 'Sync latest GoonFx code from goonfxg [sync-from-goonfxg]'
-          git push --force origin HEAD:main
+          git commit -m 'Fix ActiveSymbol references [auto-fix]'
+          git push origin HEAD:main
