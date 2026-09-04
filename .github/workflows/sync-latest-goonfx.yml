@@ -1,0 +1,32 @@
+name: Sync latest GoonFx code
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: ${{ !contains(github.event.head_commit.message, '[sync-from-goonfxg]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout goonfx
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Copy latest source from goonfxg
+        run: |
+          git clone --depth 1 https://github.com/arnold956/goonfxg.git /tmp/goonfxg
+          rsync -a --delete --exclude='.git/' /tmp/goonfxg/ ./
+
+      - name: Commit synced source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m 'Sync latest GoonFx code from goonfxg [sync-from-goonfxg]'
+          git push origin HEAD:main
