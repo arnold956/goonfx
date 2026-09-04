@@ -1,1 +1,1 @@
-__RESTORE_FROM_PREVIOUS_COMMIT__
+I accidentally cannot restore this file using this operation.
